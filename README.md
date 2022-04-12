@@ -47,3 +47,31 @@ server {
 }
 
 ```
+
+VHost Proxy with WS
+===================
+
+```
+server {
+        listen 80;
+        listen [::]:80;
+
+        server_name api.example.com;
+
+        #root /var/www/example.com;
+        #index index.html;
+
+        location / {
+#        root /path/to/myapp/public;
+                proxy_set_header X-Forwarded-Server $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_pass http://localhost:4000;
+                proxy_pass_request_headers on;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "Upgrade";
+                proxy_set_header Host $host;
+        }
+}
+```
