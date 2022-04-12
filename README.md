@@ -6,12 +6,12 @@ server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
-        root /var/www/admin-webfront/build;
+        root /var/www/example/build;
 
         # Add index.php to the list if you are using PHP
         index index.html index.htm index.nginx-debian.html;
 
-        server_name admin-new.finutss.com;
+        server_name admin.example.com;
 
         location / {
                 # First attempt to serve request as file, then
@@ -33,7 +33,7 @@ server {
         listen 80;
         listen [::]:80;
 
-        server_name api.finutss.com;
+        server_name api.example.com;
 
         root /var/www/example.com;
         index index.html;
