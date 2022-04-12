@@ -17,7 +17,7 @@ server {
                 # First attempt to serve request as file, then
                 # as directory, then fall back to displaying a 404.
                 try_files $uri $uri/ =404;
-                proxy_cache_valid any 1m;
+                proxy_cache_valid any 30m;
                 proxy_cache_min_uses 3;
                 proxy_cache_bypass $cookie_nocache $arg_nocache$arg_comment;
         }
