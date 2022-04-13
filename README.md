@@ -13,14 +13,31 @@ server {
 
         server_name admin.example.com;
 
-        location / {
+        #location / {
                 # First attempt to serve request as file, then
                 # as directory, then fall back to displaying a 404.
-                try_files $uri $uri/ =404;
-                proxy_cache_valid any 30m;
-                proxy_cache_min_uses 3;
-                proxy_cache_bypass $cookie_nocache $arg_nocache$arg_comment;
+        #       try_files $uri $uri/ =404;
+        #        proxy_cache_valid any 30m;
+        #        proxy_cache_min_uses 1;
+        #        proxy_cache_bypass $cookie_nocache $arg_nocache$arg_comment;
+        #}
+
+        location ~* ^.+\.(?:css|cur|js|jpe?g|gif|htc|ico|png|html|xml|otf|ttf|eot|woff|woff2|svg)$ {
+                access_log off;
+                expires 30d;
+                add_header Cache-Control public;
+
+    ## No need to bleed constant updates. Send the all shebang in one
+    ## fell swoop.
+                tcp_nodelay off;
+
+    ## Set the OS file cache.
+                open_file_cache max=3000 inactive=120s;
+                open_file_cache_valid 45s;
+                open_file_cache_min_uses 2;
+                open_file_cache_errors off;
         }
+
 
 }
 
