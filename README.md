@@ -28,7 +28,7 @@ server {
 #
 # You can move that to a different file under sites-available/ and symlink that
 # to sites-enabled/ to enable it.
-#
+
 server {
         listen 80;
         listen [::]:80;
@@ -39,7 +39,6 @@ server {
         index index.html;
 
         location / {
-#        root /path/to/myapp/public;
                 proxy_set_header X-Forwarded-Server $host;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                 proxy_pass http://localhost:4000;
