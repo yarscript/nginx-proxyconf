@@ -67,7 +67,8 @@ server {
         location / {
                 proxy_set_header X-Forwarded-Server $host;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_pass http://localhost:4000;
+                proxy_pass http://localhost:8080;
+                proxy_redirect http://localhost/ http://localhost:8080/;
         }
 }
 
