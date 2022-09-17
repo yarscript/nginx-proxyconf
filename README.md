@@ -1,5 +1,11 @@
-# Enable local port firewall
-sudo ufw allow 8080 
+# Preset config
+```sh
+# Firewall
+$ sudo ufw allow 8080 
+
+# For Apache reverse proxy
+sudo ufw allow "Apache Full"
+```
 
 # nginx-proxyconf
 Nginx proxy vhost conf
