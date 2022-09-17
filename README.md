@@ -1,3 +1,6 @@
+# Enable local port firewall
+sudo ufw allow 8080 
+
 # nginx-proxyconf
 Nginx proxy vhost conf
 
