@@ -97,6 +97,21 @@ server {
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection $http_connection;
                 proxy_set_header Host $host;
+                
+                
+                    # Delegate to the Solid server, passing the original host and protocol
+    proxy_pass http://community-solid-server$request_uri;
+    proxy_set_header X-Forwarded-Host $host;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    # Pass these headers from the Solid server back to the client
+    proxy_pass_header Server;
+    proxy_pass_header Set-Cookie;
+
+    # Enable Websocket support
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
         }
 }
 ```
